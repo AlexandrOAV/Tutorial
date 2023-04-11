@@ -1,4 +1,14 @@
-const colors = ["red", "green", "blue"];
-
-colors.splice(2, 0, "purple");
-console.log(colors); // ["red", "green", "purple", "blue"]
+const book = {
+  title: "The Last Kingdom",
+  author: "Bernard Cornwell",
+  genres: ["historical prose", "adventure"],
+  rating: 8.38,
+};
+const keys = Object.keys(book);
+console.log(keys);
+for (const key of keys) {
+  // Ключ
+  console.log(key);
+  // Значення властивості
+  console.log(book[key]);
+}
