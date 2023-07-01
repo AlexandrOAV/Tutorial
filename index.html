@@ -19,9 +19,13 @@
       referrerpolicy="no-referrer"
     />
     <link rel="stylesheet" href="./css/style.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/basiclightbox@5.0.4/dist/basicLightbox.min.css"
+    />
   </head>
   <body>
-    <div>
+    <!-- <div>
       <div>
         <h2><em> Твої зусилля не марні </em></h2>
       </div>
@@ -36,25 +40,17 @@
         src="https://placeimg.com/400/200/nature"
         alt="Beautiful nature"
       />
+    </div> -->
+    <svg width="64" height="18">
+      <use href="../img/sprite.svg#icon-close"></use>
+    </svg>
+    <div class="js-cart">
+      <button>book 1</button>
+      <button>book 2</button>
+      <button>book 3</button>
     </div>
-    <!-- <p>Selected option text: <span class="text-output">none</span></p>
-
-    <p></p>
-    <p>Selected option value: <span class="value-output">none</span></p>
-
-    <p>
-      <select class="pizza-select">
-        <option value="four_meats">Four Meats</option>
-        <option value="royal_cheese">Royal Cheese</option>
-        <option value="vegetarian">Vegetarian</option>
-        <option value="smoked_salmon">Smoked Salmon</option>
-      </select>
-      <script src="./js/modal.js"></script>
-    
-      <script src="./js/javascrip1.js"></script>
-    </p> -->
-    <p class="output">Selected color: -</p>
-    <div class="color-palette"></div>
+    <script src="https://cdn.jsdelivr.net/npm/basiclightbox@5.0.4/dist/basicLightbox.min.js"></script>
     <script src="./js/trannngs.js"></script>
+    <!-- <script src="./js/BooksApiService.js"></script> -->
   </body>
 </html>

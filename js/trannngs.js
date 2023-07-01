@@ -1,205 +1,89 @@
-// // Напиши клас Storage, який буде створювати об'єкти для управління складом товарів.
-// // Клас очікує тільки один аргумент - початковий масив товарів, який записується у властивість
-// //  items об'єкта, що створюється.
-// // Оголоси наступні методи класу:
+const divEl = document.querySelector('.js-cart');
+divEl.addEventListener('click', openModal);
+const URL = 'https://books-backend.p.goit.global/books/'
+const objShop = {
+  // 'Amazon': '<img src="./img/amazon.png" alt="logo Amazon" width="62" height="19"></img>',
+  'Amazon': '<svg class="svg-shop" width="64" height="18"> <use href="./images/amazon.svg"></use></svg>',
+  'Apple Books':'<img src="./img/apple.png" alt="logo Amazon" width="62" height="19"></img>',
+  'Barnes and Noble': '<img src="./img/baren-nobel.png" alt="logo Barnes and Noble" width="33" height="33"></img>',
+  'Books-A-Million': '<img src="./img/books-a-million.png" alt="logo Books A Million" width="62" height="28"></img>',
+  'Bookshop': '<img src="./img/book-shop.png" alt="logo Bookshop" width="33" height="33"></img>',
+  'IndieBound': '<img src="./img/india-book.png" alt="logo Indie Bound" width="35" height="28"></img>',
+};
 
-// // getItems() - повертає масив поточних товарів у властивості items об'єкта,
-// // який викликає цей метод.
-// //   addItem(newItem) - приймає новий товар newItem і додає його в масив товарів у властивості
-// // items об'єкта, який викликає цей метод.
-// // removeItem(itemToRemove) - приймає товар itemToRemove і видаляє його з масиву товарів у
-// // властивості items об'єкта, який викликає цей метод.
-// class Storage  {
-//   constructor(items) {
-//     this.items = items;
-//   }
-//   getItems(){
-//       return this.items;
-//      }
-//  addItem(newItem) {
-//       this.items.push(newItem);
-//   }
-//   removeItem(itemToRemove) {
-//     const indexItems = this.items.indexOf(itemToRemove);
-//     if (indexItems>-1) {
-//       this.items.splice(indexItems,1)
-//     };
-   
-//   }
-//     }
+
+async function getInfoAboutBook(bookId) {
+    const response = await fetch(`${URL}${bookId}`);
+    const dataRespons = await response.json();
+  const bookObj = {
+    img: dataRespons.book_image,
+    bookName: dataRespons.list_name,
+    author: dataRespons.author,
+    description: dataRespons.description,
+    shops:dataRespons.buy_links,
+  }
+  console.log(bookObj.shops)
+    return bookObj;
+};
+function getImeges(name) {
+  if (name in objShop) {
+    const image = objShop[name];
+    return image;
+  } else return '';
+};
+async function addConten(bookId) {
+  // let pictur = '';
+  const bookObj=  await getInfoAboutBook(bookId)
+  const shopsName = bookObj.shops.map(({ name, url }) => {
+   const pictur= getImeges(name);
+    return `<li class="item item-book"><a href="${url}" class="link link-image">${pictur}
+    </a></li>`
+  }).join('\n');
   
 
+  return ` <div class="container-modal js-modal">
+      <button type='button' class="close-button">
+      <svg class="close-svg" width="24" height="24">
+                    <use href="./img/sprite.svg#icon-close"></use>
+                  </svg>
+                  </button>
+        <div class="image-block">
+     <img src="${bookObj.img}" alt="image book ${bookObj.bookName}" width="287" height="408"></img> 
+      </div>
+      <h2 class="name-book">${bookObj.bookName}</h2>
+     <p class="text-author">${bookObj.author}</p>
+     <p class="text-description">${bookObj.description}</p>
+     <ul class="list shop-list">${shopsName}</ul>
+    </div>
+  `
+}
 
-// // Change code above this line
-// const storage = new Storage(["Nanitoids", "Prolonger", "Antigravitator"]);
-// console.log(storage.getItems()); // ["Nanitoids", "Prolonger", "Antigravitator"]
-// storage.addItem("Droid");
-// console.log(storage.getItems()); // ["Nanitoids", "Prolonger", "Antigravitator", "Droid"]
-// storage.removeItem("Prolonger");
-// console.log(storage.getItems()); // ["Nanitoids", "Antigravitator", "Droid"]
-
-
-
-
-// Напиши клас StringBuilder, який приймає один параметр initialValue - довільний рядок,
-//   який записується у властивість value об'єкта, що створюється.
-//  Оголоси наступні методи класу:
-
-// getValue() - повертає поточне значення властивості value.
-//   padEnd(str) - отримує параметр str(рядок) і додає його в кінець значення властивості
-// value об'єкта, який викликає цей метод.
-// padStart(str) - отримує параметр str(рядок) і додає його на початок значення властивості
-// value об'єкта, який викликає цей метод.
-
-// padBoth(str) - отримує параметр str(рядок) і додає його на початок і в кінець значення
-// властивості value об'єкта, який викликає цей метод.
-// Change code above this line
-// class StringBuilder{
-//   constructor(initialValue) {
-//     this.value = initialValue;
-//   }
-//   getValue() {
-//     return this.value;
-//   }
-//   padEnd(str) {
-//     this.value = this.value + str;
-//   }
-//   padStart(str) {
-//     this.value = str + this.value;
-//   }
-//   padBoth(str) {
-//     this.value = str + this.value + str;
-//   }
-// }
-// const builder = new StringBuilder(".");
-// console.log(builder.getValue()); // "."
-// builder.padStart("^");
-// console.log(builder.getValue()); // "^."
-// builder.padEnd("^");
-// console.log(builder.getValue()); // "^.^"
-// builder.padBoth("=");
-// console.log(builder.getValue()); // "=^.^="
-
-
-// Додай класу Admin наступні властивості і методи.
-// Публічну властивість blacklistedEmails для зберігання чорного списку поштових адрес користувачів.
-// Значення за замовчуванням — це порожній масив.
-// Публічний метод blacklist(email) для додавання пошти у чорний список.
-// Метод повинен додавати значення параметра email в масив, що зберігається у властивості
-// blacklistedEmails.
-// Публічний метод isBlacklisted(email) для перевірки пошти у чорному списку.
-// Метод повинен перевіряти наявність значення параметра email в масиві, що зберігається у
-// властивості blacklistedEmails, і повертати true або false.
-
-// class User {
-//   email;
-
-//   constructor(email) {
-//     this.email = email;
-//   }
-
-//   get email() {
-//     return this.email;
-//   }
-
-//   set email(newEmail) {
-//     this.email = newEmail;
-//   }
-// }
-// class Admin extends User {
-//   // Change code below this line
-
-//   static AccessLevel = {
-//     BASIC: "basic",
-//     SUPERUSER: "superuser",
-//   };
-  
-
-//   constructor({ email, accessLevel, blacklistedEmails=[] }) {
-//     super(email);
-//     this.accessLevel = accessLevel;
-//     this.blacklistedEmails = blacklistedEmails;
-//   }
-//   blacklist(email) {
-//     return this.blacklistedEmails.push(email)
-//   }
-//   isBlacklisted(email) {
-//     return this.blacklistedEmails.some(listEmail => listEmail === email);
-// }
-//   // Change code above this line
-// }
-
-// const mango = new Admin({
-//   email: "mango@mail.com",
-//   accessLevel: Admin.AccessLevel.SUPERUSER,
-//   blacklistedEmails:[],
-// });
-
-// console.log(mango.email); // "mango@mail.com"
-// console.log(mango.accessLevel); // "superuser"
-
-// mango.blacklist("poly@mail.com");
-// console.log(mango.blacklistedEmails); // ["poly@mail.com"]
-// console.log(mango.isBlacklisted("mango@mail.com")); // false
-// console.log(mango.isBlacklisted("poly@mail.com")); // true
-// const tweets = [
-//   { id: "000", likes: 5, tags: ["js", "nodejs"] },
-//   { id: "001", likes: 2, tags: ["html", "css"] },
-//   { id: "002", likes: 17, tags: ["html", "js", "nodejs"] },
-//   { id: "003", likes: 8, tags: ["css", "react"] },
-//   { id: "004", likes: 0, tags: ["js", "nodejs", "react"] },
-// ];
-
-// const getTags = tweets =>
-//   tweets.reduce((allTags, tweet) => {
-//     allTags.push(...tweet.tags);
-    
-//     return allTags;
-//   }, []);
-
-// const tags = getTags(tweets);
-
-// Винесемо callback-функцію окремо, а в reducе передамо посилання на неї.
-// Це стандартна практика, якщо callback-функція досить велика.
-const colorPalette = document.querySelector(".color-palette");
-const output = document.querySelector(".output");
-
-colorPalette.addEventListener("click", selectColor);
-
-// This is where delegation «magic» happens
-function selectColor(event) {
-  if (event.target.nodeName !== "BUTTON") {
+function closeModalEscape(instance) {
+     function eventHandler(event) {
+    if (event.key === 'Escape') {
+      instance.close();
+    }
+  }
+    document.addEventListener("keydown", event => {
+    if (event.key !== 'Escape') {
+        return
+      }
+  document.removeEventListener("keydown", eventHandler); 
+      instance.close();
+});}
+async function openModal(event) {
+  event.preventDefault();
+  if (event.target.tagName !== 'BUTTON') {
     return;
   }
-    console.dir(event.target);
-  const selectedColor = event.target.dataset.color;
-    output.textContent = `Selected color: ${selectedColor}`;
-  output.style.color = selectedColor;
+  const instance = basicLightbox.create(await addConten('643282b1e85766588626a085'), {
+    onShow: () => { document.addEventListener("keydown", closeModalEscape(instance)); },
+    onClose: () => { document.removeEventListener("keydown", closeModalEscape(instance))},
+  });
+   instance.element().querySelector('.close-button').onclick = instance.close
+  instance.show();
+
+  // console.dir(event.target)
 }
 
-// Some helper functions to render palette items
-createPaletteItems();
 
-function createPaletteItems() {
-  const items = [];
-  for (let i = 0; i < 60; i++) {
-    const color = getRandomColor();
-    const item = document.createElement("button");
-    item.type = "button";
-    item.dataset.color = color;
-    item.style.backgroundColor = color;
-    item.classList.add("item");
-    items.push(item);
-  }
-  colorPalette.append(...items);
-}
-
-function getRandomColor() {
-  return `#${getRandomHex()}${getRandomHex()}${getRandomHex()}`;
-}
-
-function getRandomHex() {
-  return Math.round(Math.random() * 256)
-    .toString(16)
-    .padStart(2, "0");
-}
