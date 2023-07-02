@@ -63,8 +63,8 @@ img {
     overflow-y: auto;
     scrollbar-width: thin;
     border-radius: 18px;
-    border: 2px solid #111;
-    background-color: #FFF;
+    border: 2px solid #FFF;
+    background-color: #202024;
     
     
   
@@ -81,9 +81,6 @@ img {
     width: 287px;
     margin-top: 4px;
     border-radius: 8px;
-    border: 1px solid #000;
-    background: lightgray 50%;
-    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
 }
 
 .close-button{
@@ -97,14 +94,14 @@ right: 12px;
 top: 12px;     
 background-color: transparent;
 border: none;
-stroke: #000;
+stroke: #FFF;
 }
 
 .name-book{
     font-family: DM Sans;
     margin-top: 14px;
     text-transform: uppercase;
-    color: #111;
+    color: #FFF;
         font-size: 16px;
         font-family: DM Sans;
         font-style: normal;
@@ -127,13 +124,14 @@ stroke: #000;
 font-size: 14px;
     font-family: DM Sans;
     margin-top: 18px;
-    color: #111;
+    color: #FFF;
     font-style: normal;
     font-weight: 400;
     line-height: 1.29;
     letter-spacing: -0.56px;
 }
 .shop-list{
+    background-color: #FFF;
     margin-top: 14px;
     padding-bottom: 5px;
     display: flex;
@@ -143,7 +141,7 @@ font-size: 14px;
     overflow-x:auto;
     white-space: nowrap; 
     scrollbar-width:auto;
-    stroke: #000;
+    stroke: #FFF;
 }
 .item-book{
   flex: 0 0 35%;
@@ -176,7 +174,8 @@ font-size: 14px;
    border: 2px solid #4F2EE8;
    padding: 14px 23px;
    margin-top: 40px;
-    color: #111;
+    color: #FFF;
+    background-color: transparent;
         font-size: 12px;
         font-family: DM Sans;
         font-style: normal;
@@ -200,7 +199,7 @@ font-size: 14px;
     margin: 0 auto;
     margin-top: 8px;
     max-width: 210px;
-    color: rgba(17, 17, 17, 0.50);
+    color: rgba(255, 255, 255, 0.50);
     text-align: center;
     font-size: 10px;
     font-family: DM Sans;
